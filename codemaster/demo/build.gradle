@@ -1,0 +1,91 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.8.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+plugins {
+	id 'java'
+    id 'net.ltgt.apt' version '0.9'
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'war'
+
+compileJava {
+	options.compilerArgs << '-parameters'
+}
+
+group = 'com.codemaster'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+    mapstructVersion = "1.2.0.Final"
+}
+
+configurations {
+	jaxb
+    jaxws
+}
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile ('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-jdbc')
+
+	compile 'org.springframework.boot:spring-boot-starter-actuator:1.5.4.RELEASE'
+	compile 'org.springframework.security:spring-security-cas'
+    compile 'org.springframework.boot:spring-boot-starter-security'
+	compile 'org.springframework:spring-context-support'
+	compile 'org.springframework.boot:spring-boot-starter-mail'
+	compile 'commons-validator:commons-validator:1.4.1'
+
+	compile 'org.liquibase:liquibase-core'
+	compile 'com.h2database:h2'
+	compile 'org.postgresql:postgresql'
+
+	compile "org.mapstruct:mapstruct-jdk8:${mapstructVersion}"
+
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile('org.springframework.restdocs:spring-restdocs-mockmvc')
+	compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
+
+	// Swagger
+	compile ('io.springfox:springfox-swagger2:2.9.2') {
+		exclude group: 'org.mapstruct', module: 'mapstruct'
+	}
+
+	// Lombok
+    compileOnly('org.projectlombok:lombok:1.16.20')
+   // annotationProcessor 'org.projectlombok:lombok:1.16.20'
+
+	compile 'javax.servlet:jstl'
+	compile 'org.springframework.boot:spring-boot-starter-tomcat'
+	compile 'org.apache.tomcat.embed:tomcat-embed-jasper'
+
+	// Test
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
+	testCompile 'org.springframework.security:spring-security-test'
+	testCompile 'junit:junit:4.12'
+	testCompile 'org.assertj:assertj-core:3.7.0'
+	testRuntime 'com.unboundid:unboundid-ldapsdk'
+
+	// Annotation processing
+	apt "org.mapstruct:mapstruct-processor:${mapstructVersion}", "org.projectlombok:lombok"
+}
+
