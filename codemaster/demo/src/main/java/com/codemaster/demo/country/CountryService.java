@@ -1,6 +1,5 @@
 package com.codemaster.demo.country;
 
-import com.codemaster.demo.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

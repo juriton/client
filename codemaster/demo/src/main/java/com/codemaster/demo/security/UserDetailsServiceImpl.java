@@ -13,7 +13,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.PostConstruct;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,25 +25,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserService userService;
 
-
-   /* @PostConstruct
-    public void init() {
-        Role role = new Role();
-        role.setName("User");
-        ApplicationUser applicationUser = new ApplicationUser();
-        applicationUser.setUserName("Juhan.Juurikas");
-        applicationUser.setPassword("Juhan123");
-        userService.save(applicationUser);
-        ApplicationUser applicationUser1 = new ApplicationUser();
-        applicationUser1.setUserName("Mare.Maasikas");
-        applicationUser1.setPassword("Mare123");
-        userService.save(applicationUser1);
-        ApplicationUser applicationUser2 = new ApplicationUser();
-        applicationUser2.setUserName("Kristel.Mere");
-        applicationUser2.setPassword("Kristel123");
-        userService.save(applicationUser2);
-        // etc
-    }*/
 
     @Override
     @Transactional(readOnly = true)

@@ -27,13 +27,13 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute("userForm") ApplicationUser userForm, BindingResult bindingResult, Model model) {
-        securityService.autoLogin(userForm.getUserName(), userForm.getPasswordConfirm());
+    public String login(@ModelAttribute("userForm") ApplicationUser userForm) {
+        securityService.autoLogin(userForm.getUserName(), userForm.getPassword());
         return "login";
     }
 
     @GetMapping({"/"})
-    public String getClients(Model model, @RequestParam(value="name", required=false) String name) {
+    public String getClients(@RequestParam(value="name", required=false) String name) {
         return "redirect:/clients";
     }
 }

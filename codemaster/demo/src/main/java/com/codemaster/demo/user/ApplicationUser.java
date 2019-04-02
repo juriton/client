@@ -3,7 +3,10 @@ package com.codemaster.demo.user;
 import com.codemaster.demo.common.AuditedEntity;
 import com.codemaster.demo.role.Role;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import java.util.Set;
 
 @Entity
@@ -14,9 +17,6 @@ public class ApplicationUser extends AuditedEntity {
     private String userName;
 
     private String password;
-
-    @Transient
-    private String passwordConfirm;
 
     @ManyToMany
     private Set<Role> roles;
@@ -35,14 +35,6 @@ public class ApplicationUser extends AuditedEntity {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getPasswordConfirm() {
-        return passwordConfirm;
-    }
-
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
     }
 
     public Set<Role> getRoles() {

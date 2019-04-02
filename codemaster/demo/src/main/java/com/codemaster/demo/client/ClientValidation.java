@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
-import org.apache.commons.validator.routines.EmailValidator;
+
 
 @Component
 public class ClientValidation  implements Validator {
