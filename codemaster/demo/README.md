@@ -30,3 +30,13 @@ gradlew idea
  * JDK 8 installed and in PATH
  * Tomcat >8 
  
+ ### Users
+ 
+ username: Juhan.Juurikas
+ password: Juhan123
+ 
+ username: Mare.Maasikas
+ password: Mare123 
+ 
+ username: Kristel.Mere
+ password: Kristel123 
