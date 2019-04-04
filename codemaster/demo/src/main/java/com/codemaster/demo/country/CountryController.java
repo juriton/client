@@ -11,16 +11,17 @@ import java.util.List;
 @RestController
 public class CountryController {
 
-    @Autowired
-    private CountryService countryService;
+    private final CountryService countryService;
+    private final CountryMapper countryMapper;
 
     @Autowired
-    private CountryMapper countryMapper;
+    CountryController (CountryService countryService, CountryMapper countryMapper) {
+        this.countryService = countryService;
+        this.countryMapper = countryMapper;
+    }
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, value = "/countries")
     public List<CountryDto> getCountries() {
-        List<Country> countries = countryService.getAll();
-        List<CountryDto> countryDtoList = countryMapper.listToRest(countries);
-        return countryDtoList;
+        return countryMapper.listToRest(countryService.getAll());
     }
 }

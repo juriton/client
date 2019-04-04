@@ -12,14 +12,16 @@ import java.util.List;
 @Controller
 public class ClientController {
 
-    @Autowired
-    private ClientService clientService;
+    private final ClientService clientService;
+    private final UserService userService;
+    private final ClientValidation clientValidation;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
-    private ClientValidation clientValidation;
+    ClientController(ClientService clientService, UserService userService, ClientValidation clientValidation) {
+        this.clientService = clientService;
+        this.userService = userService;
+        this.clientValidation = clientValidation;
+    }
 
     @GetMapping("/clients")
     public String getClients(Model model, @RequestParam(value="clients", required=false) List<Client> clients) {
@@ -34,35 +36,34 @@ public class ClientController {
     }
 
     @GetMapping("/editClient/{clientId}")
-    public String getClientById(@ModelAttribute("clientForm") Client client, @PathVariable Long clientId, Model model) {
-        Client clientById = clientService.getClientById(clientId);
-        model.addAttribute("clientById", clientById);
+    public String getClientById(@ModelAttribute("clientForm") Client clientForm, @PathVariable Long clientId, Model model) {
+        Client client = clientService.getClientById(clientId);
+        model.addAttribute("client", client);
         return "editClient";
     }
 
-    @RequestMapping(value = "/client", method = RequestMethod.POST)
+    @PostMapping("/client")
     public String addClient(@ModelAttribute("clientForm") Client clientForm, BindingResult bindingResult) {
         clientValidation.validate(clientForm, bindingResult);
         if (bindingResult.hasErrors()) {
             return "client";
         }
         clientForm.setUser(userService.getAuthenticatedUser());
-
         clientService.save(clientForm);
-
         return "redirect:/clients";
     }
 
-    @RequestMapping(value = "/editClient", method = RequestMethod.POST)
-    public String editClient(@ModelAttribute("clientForm") Client clientForm, BindingResult bindingResult) {
+    @PostMapping("/editClient/{clientId}")
+    public String editClient(@ModelAttribute("clientForm") Client clientForm, BindingResult bindingResult, @PathVariable Long clientId, Model model) {
         clientValidation.validate(clientForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            return "client";
+            Client client = clientService.getClientById(clientId);
+            model.addAttribute("client", client);
+            return "editClient";
         }
         clientForm.setUser(userService.getAuthenticatedUser());
         clientService.save(clientForm);
-
         return "redirect:/clients";
     }
 }

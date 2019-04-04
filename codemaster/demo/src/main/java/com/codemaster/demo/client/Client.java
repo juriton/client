@@ -1,14 +1,18 @@
 package com.codemaster.demo.client;
 
 import com.codemaster.demo.common.AuditedEntity;
+import com.codemaster.demo.country.Country;
 import com.codemaster.demo.user.ApplicationUser;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+
 
 @Getter
 @Setter
@@ -21,10 +25,12 @@ public class Client extends AuditedEntity {
     private String userName;
     private String email;
     private String address;
-    private String country;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "country")
+    private Country country;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    @JsonProperty
     public ApplicationUser user;
 }
