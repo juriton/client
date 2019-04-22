@@ -61,7 +61,7 @@
                 <form:form method="POST" action="${contextPath}/client" modelAttribute="clientForm" class="needs-validation">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <spring:bind path="firstName">
                                 <label for="firstName">First name</label>
                                 <div class="form-group ${status.error ? 'has-error' : ''}">
@@ -71,7 +71,7 @@
                                 </div>
                             </spring:bind>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <spring:bind path="lastName">
                                 <label for="lastName">Last name</label>
                                 <div class="form-group ${status.error ? 'has-error' : ''}">
@@ -82,7 +82,7 @@
                             </spring:bind>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <spring:bind path="userName">
                                 <label for="userName">Username</label>
                                 <div class="form-group ${status.error ? 'has-error' : ''}">
@@ -93,7 +93,7 @@
                             </spring:bind>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <spring:bind path="email">
                                 <label for="email">Email <span class="text-muted">(Optional)</span></label>
                                 <div class="form-group ${status.error ? 'has-error' : ''}">
@@ -114,7 +114,7 @@
                             </spring:bind>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <spring:bind path="country">
                                 <label for="country">Country</label>
                                 <div class="form-group ${status.error ? 'has-error' : ''}">

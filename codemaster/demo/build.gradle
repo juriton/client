@@ -12,8 +12,9 @@ buildscript {
 
 plugins {
 	id 'java'
-    id 'net.ltgt.apt' version '0.9'
+    id 'net.ltgt.apt' version '0.15'
 }
+
 
 apply plugin: 'java'
 apply plugin: 'idea'
@@ -25,7 +26,7 @@ compileJava {
 	options.compilerArgs << '-parameters'
 }
 
-group = 'com.codemaster'
+group = 'com.company'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -71,8 +72,8 @@ dependencies {
 	}
 
 	// Lombok
-    compileOnly('org.projectlombok:lombok:1.16.20')
-   // annotationProcessor 'org.projectlombok:lombok:1.16.20'
+    compileOnly('org.projectlombok:lombok')
+    annotationProcessor 'org.projectlombok:lombok'
 
 	compile 'javax.servlet:jstl'
 	compile 'org.springframework.boot:spring-boot-starter-tomcat'
@@ -86,6 +87,6 @@ dependencies {
 	testRuntime 'com.unboundid:unboundid-ldapsdk'
 
 	// Annotation processing
-	apt "org.mapstruct:mapstruct-processor:${mapstructVersion}", "org.projectlombok:lombok"
+	apt "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 }
 
